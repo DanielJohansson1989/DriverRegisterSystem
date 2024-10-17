@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IList<Employee>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <h1>Employees</h1>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Add Employee</a>
+            <form asp-action="Index">
+                <input type="text" name="searchString" placeholder="Search for a name" value="@ViewData["CurrentFilter"]" />
+                <input type="submit" value="Search" />
+            </form>
+            <ul>
+                @foreach (var user in Model)
+                {
+                    <li>
+                        <a class="employee-link" data-bs-toggle="collapse" href="#employeeOptions-@user.Id" role="button" aria-expanded="false" aria-controls="employeeOptions-@user.Id">
+                            @user.UserName
+                        </a>
+                        <div class="collapse" id="employeeOptions-@user.Id">
+                            <div class="btn-group mt-2" role="group">
+                                <a asp-controller="Employee" asp-action="EditEmployee" asp-route-id="@user.Id" class="btn btn-warning">Update</a>
+                                <a asp-controller="Employee" asp-action="DeleteEmployee" asp-route-id="@user.Id" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

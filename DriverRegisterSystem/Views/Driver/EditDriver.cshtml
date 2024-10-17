@@ -1,0 +1,13 @@
+﻿@model Driver
+
+<form class="form-group">
+    <input type="hidden" asp-for="DriverId" />
+    <input type="hidden" asp-for="TotalExpense" />
+    <input type="hidden" asp-for="TotalIncome" />
+    <label asp-for="DriverName">@Model.DriverName</label>
+    <input asp-for="DriverName" class="form-control" />
+    <label asp-for="CarReg">@Model.CarReg</label>
+    <input asp-for="CarReg" class="form-control" />
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>

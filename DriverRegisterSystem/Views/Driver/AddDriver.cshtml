@@ -1,0 +1,16 @@
+﻿@model Driver
+
+<div class="container">
+    <div class="row">
+        <div class="col-10">
+            <form asp-action="AddDriver" class="form-group">
+                <label asp-for="DriverName" class="control-label"></label>
+                <input asp-for="DriverName" class="form-control" />
+                <label asp-for="CarReg" class="control-label"></label>
+                <input asp-for="CarReg" class="form-control" />
+                <input type="submit" class="btn btn-primary" value="Submit" />
+            </form>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>
