@@ -1,0 +1,19 @@
+﻿@model EmployeeViewModel
+
+<form class="form-group" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div>
+        <label asp-for="Name">@Model.Name</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div>
+        <label asp-for="Email">@Model.Email</label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <div>
+        <label for="Role">Role</label>
+        <select asp-for="Role" asp-items="Model.Roles" class="form-control"></select>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>

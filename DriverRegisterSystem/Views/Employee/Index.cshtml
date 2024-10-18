@@ -15,12 +15,12 @@
                 {
                     <li>
                         <a class="employee-link" data-bs-toggle="collapse" href="#employeeOptions-@user.Id" role="button" aria-expanded="false" aria-controls="employeeOptions-@user.Id">
-                            @user.UserName
+                            @user.Name
                         </a>
                         <div class="collapse" id="employeeOptions-@user.Id">
                             <div class="btn-group mt-2" role="group">
-                                <a asp-controller="Employee" asp-action="EditEmployee" asp-route-id="@user.Id" class="btn btn-warning">Update</a>
-                                <a asp-controller="Employee" asp-action="DeleteEmployee" asp-route-id="@user.Id" class="btn btn-danger">Delete</a>
+                                <a asp-controller="Employee" asp-action="Edit" asp-route-id="@user.Id" class="btn btn-warning">Update</a>
+                                <a asp-controller="Employee" asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger">Delete</a>
                             </div>
                         </div>
                     </li>
