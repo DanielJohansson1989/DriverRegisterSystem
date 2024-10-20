@@ -1,30 +1,38 @@
 ﻿@model IEnumerable<Driver>;
+@{
+    ViewData["Title"] = "Drivers";
+}
 
-<div class="container">
-    <div class="row">
-        <div class="col-10">
-            <a asp-action="AddDriver">Add Driver</a>
-            <form asp-action="Index">
-                <input type="text" name="searchString" placeholder="Search for a name" value="@ViewData["CurrentFilter"]" />
-                <input type="submit" value="Search" />
-            </form>
-            <ul>
-                @foreach (var item in Model)
-                {
-                    <li>
-                        <a class="driver-link" data-bs-toggle="collapse" href="#driverOptions-@item.DriverId" role="button" aria-expanded="false" aria-controls="driverOptions-@item.DriverId">
-                            @item.DriverName
-                        </a>
-                        <div class="collapse" id="driverOptions-@item.DriverId">
-                            <div class="btn-group mt-2" role="group">
-                                <a asp-controller="Driver" asp-action="DriverInfo" asp-route-id="@item.DriverId" class="btn btn-info">Driver Info</a>
-                                <a asp-controller="Driver" asp-action="EditDriver" asp-route-id="@item.DriverId" class="btn btn-warning">Update</a>
-                                <a asp-controller="Driver" asp-action="DeleteDriver" asp-route-id="@item.DriverId" class="btn btn-danger">Delete</a>
-                            </div>
+<h1 class="text-center text-info">@ViewData["Title"]</h1>
+<div class="row justify-content-center mt-5">
+    <div class="col-md-4 card shadow p-3 me-1 justify-content-center align-items-center">
+        <ul class="list-group">
+            @foreach (var item in Model)
+            {
+                <li class="list-group-item border-0">
+                    <a class="text-decoration-none text-black fw-bold" data-bs-toggle="collapse" href="#driverOptions-@item.DriverId" role="button" aria-expanded="false" aria-controls="driverOptions-@item.DriverId">
+                        @item.DriverName
+                    </a>
+                    <div class="collapse" id="driverOptions-@item.DriverId">
+                        <div class="mt-2" role="group">
+                            <a asp-controller="Driver" asp-action="DriverInfo" asp-route-id="@item.DriverId" class="btn btn-primary me-1">Driver Info</a>
+                            <a asp-controller="Driver" asp-action="EditDriver" asp-route-id="@item.DriverId" class="btn btn-success ms-1 me-1">Update</a>
+                            <a asp-controller="Driver" asp-action="DeleteDriver" asp-route-id="@item.DriverId" class="btn btn-danger ms-1">Delete</a>
                         </div>
-                    </li>
-                }
-            </ul>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-4 ms-1">
+        <div class="d-flex justify-content-center card shadow p-3">
+            <form asp-action="Index" class="btn-group">
+                <input type="text" name="searchString" placeholder="Enter Name" value="@ViewData["CurrentFilter"]" />
+                <input type="submit" value="Filter Drivers" class="btn btn-primary" />
+            </form>
+        </div>
+        <div class="d-flex justify-content-center m-3">
+            <a asp-action="AddDriver" class="btn btn-primary shadow">Add Driver</a>
         </div>
     </div>
 </div>

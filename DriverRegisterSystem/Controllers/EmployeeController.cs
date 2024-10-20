@@ -1,11 +1,13 @@
 ﻿using DriverRegisterSystem.Models;
 using DriverRegisterSystem.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DriverRegisterSystem.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class EmployeeController : Controller
     {
         private readonly UserManager<Employee> _userManager;
@@ -32,11 +34,6 @@ namespace DriverRegisterSystem.Controllers
             return View(result);
         }
 
-        //public IActionResult Create()
-        //{
-        //    return RedirectToPage("/Account/Register", new { area = "Identity" });
-        //}
-
         public async Task<IActionResult> Delete(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
@@ -61,7 +58,7 @@ namespace DriverRegisterSystem.Controllers
             //Fetch Roles for dropdown
             var roles = _roleManager.Roles.Select(r => new SelectListItem
             {
-                Value = r.Name, // r.Id Osäker på om värdet ska vara Id eller Name
+                Value = r.Name,
                 Text = r.Name
             }).ToList();
 

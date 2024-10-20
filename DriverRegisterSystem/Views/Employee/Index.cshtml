@@ -1,31 +1,38 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @model IList<Employee>
+@{
+    ViewData["Title"] = "Employees";
+}
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-10">
-            <h1>Employees</h1>
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Add Employee</a>
-            <form asp-action="Index">
-                <input type="text" name="searchString" placeholder="Search for a name" value="@ViewData["CurrentFilter"]" />
-                <input type="submit" value="Search" />
-            </form>
-            <ul>
-                @foreach (var user in Model)
-                {
-                    <li>
-                        <a class="employee-link" data-bs-toggle="collapse" href="#employeeOptions-@user.Id" role="button" aria-expanded="false" aria-controls="employeeOptions-@user.Id">
-                            @user.Name
-                        </a>
-                        <div class="collapse" id="employeeOptions-@user.Id">
-                            <div class="btn-group mt-2" role="group">
-                                <a asp-controller="Employee" asp-action="Edit" asp-route-id="@user.Id" class="btn btn-warning">Update</a>
-                                <a asp-controller="Employee" asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger">Delete</a>
-                            </div>
+<h1 class="text-center text-info">@ViewData["Title"]</h1>
+<div class="row justify-content-center mt-5">
+    <div class="col-md-4 card shadow p-3 me-1 justify-content-center align-items-center">
+        <ul class="list-group">
+            @foreach (var user in Model)
+            {
+                <li class="list-group-item border-0">
+                    <a class="text-decoration-none fw-bold text-black" data-bs-toggle="collapse" href="#employeeOptions-@user.Id" role="button" aria-expanded="false" aria-controls="employeeOptions-@user.Id">
+                        @user.Name
+                    </a>
+                    <div class="collapse" id="employeeOptions-@user.Id">
+                        <div class="mt-2" role="group">
+                            <a asp-controller="Employee" asp-action="Edit" asp-route-id="@user.Id" class="btn btn-success me-1">Update</a>
+                            <a asp-controller="Employee" asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger ms-1">Delete</a>
                         </div>
-                    </li>
-                }
-            </ul>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-4 ms-1">
+        <div class="d-flex justify-content-center card p-3 shadow">
+            <form asp-action="Index" class="btn-group">
+                <input type="text" name="searchString" placeholder="Filter by name" value="@ViewData["CurrentFilter"]" />
+                <input type="submit" value="Filter" class="btn btn-primary" />
+            </form>
+        </div>
+        <div class="d-flex justify-content-center m-3">
+            <a class="btn btn-primary shadow" asp-area="Identity" asp-page="/Account/Register">Add Employee</a>
         </div>
     </div>
 </div>

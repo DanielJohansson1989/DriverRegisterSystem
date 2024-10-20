@@ -1,13 +1,25 @@
 ﻿@model Driver
-
-<form class="form-group">
-    <input type="hidden" asp-for="DriverId" />
-    <input type="hidden" asp-for="TotalExpense" />
-    <input type="hidden" asp-for="TotalIncome" />
-    <label asp-for="DriverName">@Model.DriverName</label>
-    <input asp-for="DriverName" class="form-control" />
-    <label asp-for="CarReg">@Model.CarReg</label>
-    <input asp-for="CarReg" class="form-control" />
-    <button type="submit" class="btn btn-primary">Update</button>
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-</form>
+@{
+    ViewData["Title"] = "Update Driver";
+}
+<h1 class="text-center text-info">@ViewData["Title"]</h1>
+<div class="row justify-content-center mt-5">
+    <div class="col-md-4 card shadow p-3">
+        <form class="form-group" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <input type="hidden" asp-for="DriverId" />
+            <div class="form-floating mb-3">
+                <input asp-for="DriverName" class="form-control" placeholder="@Model.DriverName" />
+                <label asp-for="DriverName">Name</label>
+                <span asp-validation-for="DriverName" class="text-danger"></span>
+            </div>
+            <div class ="form-floating mb-3">
+                <input asp-for="CarReg" class="form-control" placeholder="@Model.CarReg" />
+                <label asp-for="CarReg">Car Registration Number</label>
+                <span asp-validation-for="CarReg" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </form>
+    </div>
+</div>

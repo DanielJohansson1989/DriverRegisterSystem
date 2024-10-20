@@ -29,5 +29,18 @@ namespace DriverRegisterSystem.Services
                 throw new Exception($"An error occured: {ex.Message} , {ex}");
             }
         }
+
+        public async Task<IEnumerable<Note>> GetAll()
+        {
+            try
+            {
+                return await _context.Notes.Include(n => n.Driver).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception($"An error occured: {ex.Message} , {ex}");
+            }
+        }
     }
 }

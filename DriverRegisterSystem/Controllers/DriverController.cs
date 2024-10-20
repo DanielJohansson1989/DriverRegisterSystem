@@ -1,9 +1,11 @@
 ﻿using DriverRegisterSystem.Models;
 using DriverRegisterSystem.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DriverRegisterSystem.Controllers
 {
+    [Authorize(Roles = "Admin,Employee")]
     public class DriverController : Controller
     {
         private readonly IDriverRegisterRepository<Driver> _driverRepository;
@@ -43,6 +45,9 @@ namespace DriverRegisterSystem.Controllers
             {
                 result.Notes = result.Notes.Where(n => n.NoteDate >= startDate.Value && n.NoteDate <= endDate.Value);
             }
+
+            result.TotalIncome = result.Notes.Select(n => n.Income).Sum();
+            result.TotalExpense = result.Notes.Select(n => n.Expense).Sum();
             return View(result);
         }
 

@@ -7,7 +7,7 @@
 <h1 class="text-center text-info">@ViewData["Title"]</h1>
 
 <div class="row justify-content-center mt-5">
-    <div class="col-md-4 card p-3">
+    <div class="col-md-4 card shadow p-3">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
@@ -30,7 +30,8 @@
                 <label asp-for="Input.ConfirmPassword">Confirm Password</label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+            <button id="registerSubmit" type="submit" class="btn btn-primary">Submit</button>
+            <a asp-controller="Employee" asp-action="Index" class="btn btn-secondary">Back to List</a>
         </form>
     </div>
 </div>

@@ -22,6 +22,7 @@ using Microsoft.Extensions.Logging;
 
 namespace DriverRegisterSystem.Areas.Identity.Pages.Account
 {
+    [Authorize(Roles = "Admin")]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<Employee> _signInManager;

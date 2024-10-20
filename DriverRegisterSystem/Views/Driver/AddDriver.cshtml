@@ -1,16 +1,25 @@
 ﻿@model Driver
+@{
+    ViewData["Title"] = "Add Driver";
+}
 
-<div class="container">
-    <div class="row">
-        <div class="col-10">
-            <form asp-action="AddDriver" class="form-group">
-                <label asp-for="DriverName" class="control-label"></label>
+<h1 class="text-center text-info">@ViewData["Title"]</h1>
+<div class="row justify-content-center mt-5">
+    <div class="col-md-4 card shadow p-3">
+        <form asp-action="AddDriver" class="form-group" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
                 <input asp-for="DriverName" class="form-control" />
-                <label asp-for="CarReg" class="control-label"></label>
+                <label asp-for="DriverName" class="control-label">Name</label>
+                <span asp-validation-for="DriverName" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
                 <input asp-for="CarReg" class="form-control" />
-                <input type="submit" class="btn btn-primary" value="Submit" />
-            </form>
+                <label asp-for="CarReg" class="control-label">Car Registration Number</label>
+                <span asp-validation-for="CarReg" class="text-danger"></span>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Submit" />
             <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-        </div>
+        </form>
     </div>
 </div>

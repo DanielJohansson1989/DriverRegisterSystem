@@ -1,31 +1,54 @@
 ﻿@model Driver
+@{
+    ViewData["Title"] = "Driver Info";
+}
 
-<div class="container">
-    <div class="row">
-        <div class="col-10">
-            <h2>@Model.DriverName</h2>
-            <h5>@Model.CarReg</h5>
-            <a class="btn btn-primary" asp-controller="Note" asp-action="AddNote" asp-route-id="@Model.DriverId">Add a note</a>
-            <form asp-action="DriverInfo" asp-route-id="@Model.DriverId">
-                <div class="form-group">
-                    <label for="startDate">Start Date:</label>
-                    <input type="date" name="startDate" class="form-control" value="@ViewData["StartDate"]" />
-                </div>
-                <div class="form-group">
-                    <label for="endDate">End Date:</label>
-                    <input type="date" name="endDate" class="form-control" value="@ViewData["EndDate"]" />
-                </div>
-                <button type="submit" class="btn btn-primary">Filter Notes</button>
-            </form>
-            <ul>
+<h1 class="text-center text-info">@ViewData["Title"]</h1>
+<div class="row justify-content-center align-items-center mt-2">
+    <div class="col-md-2 card shadow p-3 me-1 fw-bold text-center">Total Income: @Model.TotalIncome</div><div class="col-md-2 card shadow p-3 ms-1 fw-bold text-center"> Total Expense: @Model.TotalExpense</div>
+</div>
+<div class="row justify-content-center mt-2">
+    <div class="col-md-6 card shadow me-1 p-3">
+        <h3 class="fw-bold">@Model.DriverName</h3>
+        <h5>Car: @Model.CarReg</h5>
+        <table class="table">    
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Note</th>
+                    <th>Income</th>
+                    <th>Expense</th>
+                </tr>
+            </thead>
+            <tbody>
                 @foreach (var note in Model.Notes.OrderBy(n => n.NoteDate))
                 {
-                    <li>
-                        <span>@note.NoteDate.ToString("MMMM dd, yyyy")</span>
-                        <p>@note.NoteDescription</p>
-                    </li>
+                    <tr>
+                        <td>@note.NoteDate.ToString("MMMM dd, yyyy, HH, mm")</td>
+                        <td>@note.NoteDescription</td>
+                        <td>@note.Income</td>
+                        <td>@note.Expense</td>
+                    </tr>
                 }
-            </ul>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-5">
+        <div class="d-flex justify-content-center">
+            <form asp-action="DriverInfo" asp-route-id="@Model.DriverId" class="card shadow p-3">
+                <div class="form-floating mb-3">
+                    <input type="date" name="startDate" class="form-control" value="@ViewData["StartDate"]" />
+                    <label for="startDate">Start Date</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="date" name="endDate" class="form-control" value="@ViewData["EndDate"]" />
+                    <label for="endDate">End Date</label>
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Filter Notes</button>
+            </form>
+        </div>
+        <div class="d-flex justify-content-center mt-3">
+            <a class="btn btn-primary shadow" asp-controller="Note" asp-action="AddNote" asp-route-driverId="@Model.DriverId">Add a note</a>
         </div>
     </div>
 </div>

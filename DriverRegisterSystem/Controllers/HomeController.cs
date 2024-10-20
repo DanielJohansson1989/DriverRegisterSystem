@@ -1,4 +1,5 @@
 using DriverRegisterSystem.Models;
+using DriverRegisterSystem.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -9,18 +10,26 @@ namespace DriverRegisterSystem.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly SignInManager<Employee> _signInManager;
+        private readonly INoteRepository _noteRepository;
 
-        public HomeController(ILogger<HomeController> logger, SignInManager<Employee> signInManager)
+        public HomeController(ILogger<HomeController> logger, SignInManager<Employee> signInManager, INoteRepository noteRepository)
         {
             _logger = logger;
             _signInManager = signInManager;
+            _noteRepository = noteRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             if (_signInManager.IsSignedIn(User))
             {
-                return View();
+                var allNotes = await _noteRepository.GetAll();
+                if (allNotes == null)
+                {
+                    return NotFound();
+                }
+                var recentNotes = allNotes.Where(n => n.NoteDate >= DateTime.Now.AddHours(-24) && n.NoteDate <= DateTime.Now).ToList();
+                return View(recentNotes);
             }
             return RedirectToPage("/Account/Login", new { area = "Identity" });
         }
