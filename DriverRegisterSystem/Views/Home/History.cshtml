@@ -1,0 +1,71 @@
+﻿@model HistoryViewModel
+
+@{
+    ViewData["Title"] = "History";
+}
+
+<h1 class="text-center text-info">@ViewData["Title"]</h1>
+<div class="row justify-content-center mt-5">
+    <div class="col-4 text-center">
+        <p class="card shadow fw-bolder pt-3 pb-3">Total Income: @ViewBag.CompanyTotalIncome</p>
+    </div>
+    <div class="col-4 text-center">
+        <p class="card shadow fw-bolder pt-3 pb-3">Total Expense: @ViewBag.CompanyTotalExpense</p>
+    </div>
+</div>
+<div class="row justify-content-center mt-1">
+    <div class="col-12">
+        <form class="d-flex justify-content-around align-items-center border-3 border-dark p-3 rounded-2 shadow">
+            <div class="d-flex justify-content-center">
+                <label for="startDate">Start Date</label>
+                <input type="datetime-local" name="startDate" class="form-control" value="@Model.StartDate" />
+            </div>
+            <div class="d-flex justify-content-center">
+                <label for="endDate">End Date</label>
+                <input type="datetime-local" name="endDate" class="form-control" value="@Model.EndDate" />
+            </div>
+            <div class="">
+                <select asp-for="EmployeeFilter" asp-items="Model.SelectableEmployees" class="form-control">
+                    <option value="">Select Employee</option>
+                </select>
+                @* <label for="EmployeeFilter">Filter by Employee</label> *@
+            </div>
+            <div class="">
+                <select asp-for="DriverFilter" asp-items="Model.SelectableDrivers" class="form-control">
+                    <option value="">Select Driver</option>
+                </select>
+                @* <label for="DriverFilter">Filter by Driver</label> *@
+            </div>
+            <div class="">
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row justify-content-center mt-3">
+    <div class="col-8 card shadow">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Driver</th>
+                    <th>Car</th>
+                    <th>Notification</th>
+                    <th>Date</th>
+                    <th>Responsible Employee</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var note in Model.Notes)
+                {
+                    <tr>
+                        <td>@note.Driver.DriverName</td>
+                        <td>@note.Driver.CarReg</td>
+                        <td>@note.NoteDescription</td>
+                        <td>@note.NoteDate</td>
+                        <td>@note.ResponsibleEmployee</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
