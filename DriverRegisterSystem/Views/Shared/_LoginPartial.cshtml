@@ -20,6 +20,9 @@
         <li class="nav-item">
             <a class="nav-link text-dark" asp-controller="Driver" asp-action="Index">Drivers</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Home" asp-action="History">History</a>
+        </li>
     </ul>
     <div class="d-flex justify-content-end">
         @{
@@ -35,6 +38,9 @@
             <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
             </form>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Notifications</a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-dark" asp-controller="Driver" asp-action="Index">Drivers</a>
