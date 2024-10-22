@@ -20,23 +20,24 @@ namespace DriverRegisterSystem.Controllers
         public async Task<IActionResult> AddNote(int driverId)
         {
             var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
-            AddNoteViewModel model = new AddNoteViewModel
+            Note model = new Note
             {
                 DriverId = driverId,
-                ResponsibleEmployee = currentUser.Name
+                ResponsibleEmployee = currentUser.Name,
+                NoteDate = DateTime.Now
             };
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddNote(Note note, int driverId)
+        public async Task<IActionResult> AddNote(Note model)
         {
             if (ModelState.IsValid)
             {
-                await _noteRepository.Add(note);
-                return RedirectToAction("DriverInfo", "Driver", new { id = driverId });
+                await _noteRepository.Add(model);
+                return RedirectToAction("DriverInfo", "Driver", new { id = model.DriverId });
             }
-            return View(note);
+            return View(model);
         }
     }
 }

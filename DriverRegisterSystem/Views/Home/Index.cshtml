@@ -3,31 +3,33 @@
     ViewData["Title"] = "Notifications";
 }
 
-<h1 class="text-center text-info">@ViewData["Title"]</h1>
-<div class="row justify-content-center mt-5">
-    <div class="col-8 card shadow">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Driver</th>
-                    <th>Car</th>
-                    <th>Notification</th>
-                    <th>Date</th>
-                    <th>Responsible Employee</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var note in Model)
-                {
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-8 card shadow">
+            <h2 class="text-center text-info mt-2">@ViewData["Title"]</h2>
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>@note.Driver.DriverName</td>
-                        <td>@note.Driver.CarReg</td>
-                        <td>@note.NoteDescription</td>
-                        <td>@note.NoteDate</td>
-                        <td>@note.ResponsibleEmployee</td>
+                        <th>Driver</th>
+                        <th>Car</th>
+                        <th>Notification</th>
+                        <th>Date</th>
+                        <th>Responsible Employee</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var note in Model)
+                    {
+                        <tr>
+                            <td>@note.Driver.DriverName</td>
+                            <td>@note.Driver.CarReg</td>
+                            <td>@note.NoteDescription</td>
+                            <td>@note.NoteDate</td>
+                            <td>@note.ResponsibleEmployee</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

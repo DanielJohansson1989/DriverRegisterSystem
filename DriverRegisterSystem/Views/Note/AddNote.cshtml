@@ -1,32 +1,36 @@
-﻿@model AddNoteViewModel
+﻿@model Note
 @{
     ViewData["Title"] = "Create a Note";
 }
 
-<h1 class="text-center text-info">@ViewData["Title"]</h1>
-<div class="row justify-content-center mt-5">
-    <div class="col-md-4 card p-3">
-        <form asp-action="AddNote" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input type="datetime-local" name="noteDate" class="form-control" value="@ViewData["NoteDate"]" />
-                <label for="noteDate">Note Date:</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="text" name="noteDescription" class="form-control" value="@ViewData["NoteDescription"]" />
-                <label for="noteDescription">Note Description:</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="number" name="income" class="form-control" value="@ViewData["Income"]" />
-                <label for="income">Income:(SEK)</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="number" name="expense" class="form-control" value="@ViewData["Expense"]" />
-                <label for="expense">Expense:(SEK)</label>
-            </div>
-            <input type="hidden" name="responsibleEmployee" value="@Model.ResponsibleEmployee" />
-            <input type="hidden" name="driverId" value="@Model.DriverId" />
-            <button type="submit" class="btn btn-primary">Add Note</button>
-        </form>
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-4 card shadow p-3">
+            <h2 class="text-center text-info mb-3">@ViewData["Title"]</h2>
+            <form asp-action="AddNote" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input type="datetime-local" asp-for="NoteDate" class="form-control" />
+                    <label asp-for="NoteDate">Note Date:</label>
+                    <span asp-validation-for="NoteDate" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" asp-for="NoteDescription" class="form-control" />
+                    <label asp-for="NoteDescription">Note Description:</label>
+                    <span asp-validation-for="NoteDescription" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="number" min="0" step="0.01" asp-for="Income" class="form-control" />
+                    <label asp-for="Income">Income:(SEK)</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="number" min="0" step="0.01" asp-for="Expense" class="form-control" />
+                    <label asp-for="Expense">Expense:(SEK)</label>
+                </div>
+                <input type="hidden" name="responsibleEmployee" value="@Model.ResponsibleEmployee" />
+                <input type="hidden" name="driverId" value="@Model.DriverId" />
+                <button type="submit" class="btn btn-primary">Add Note</button>
+            </form>
+        </div>
     </div>
 </div>

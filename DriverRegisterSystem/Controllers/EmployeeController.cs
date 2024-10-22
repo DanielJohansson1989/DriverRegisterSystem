@@ -56,11 +56,7 @@ namespace DriverRegisterSystem.Controllers
             }
 
             //Fetch Roles for dropdown
-            var roles = _roleManager.Roles.Select(r => new SelectListItem
-            {
-                Value = r.Name,
-                Text = r.Name
-            }).ToList();
+            var roles = PopulateRoles();
 
             //Fetch current role of the user
             var currentRoles = await _userManager.GetRolesAsync(user);
@@ -81,6 +77,7 @@ namespace DriverRegisterSystem.Controllers
         {
             if (!ModelState.IsValid)
             {
+                model.Roles = PopulateRoles();
                 return View(model);
             }
 
@@ -103,6 +100,7 @@ namespace DriverRegisterSystem.Controllers
                 {
                     ModelState.AddModelError("", error.Description);
                 }
+                model.Roles = PopulateRoles();
                 return View(model);
             }
             
@@ -117,6 +115,7 @@ namespace DriverRegisterSystem.Controllers
                     {
                         ModelState.AddModelError(string.Empty, error.Description);
                     }
+                    model.Roles = PopulateRoles();
                     return View(model);
                 }
             }
@@ -129,10 +128,20 @@ namespace DriverRegisterSystem.Controllers
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
+                model.Roles = PopulateRoles();
                 return View(model);
             }
 
             return RedirectToAction("Index");
+        }
+
+        private IEnumerable<SelectListItem> PopulateRoles()
+        {
+            return _roleManager.Roles.Select(r => new SelectListItem
+            {
+                Value = r.Name,
+                Text = r.Name
+            }).ToList();
         }
     }
 }

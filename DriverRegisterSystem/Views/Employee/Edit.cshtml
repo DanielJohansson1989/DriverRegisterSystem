@@ -3,28 +3,30 @@
     ViewData["Title"] = "Update Employee";
 }
 
-<h1 class="text-center text-info">@ViewData["Title"]</h1>
-<div class="row justify-content-center mt-5">
-    <div class="col-md-4 card shadow p-3">
-        <form class="form-group" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-floating mb-3">
-                <input asp-for="Name" class="form-control" />
-                <label asp-for="Name">@Model.Name</label>
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Email" class="form-control" />
-                <label asp-for="Email">@Model.Email</label>
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <select asp-for="Role" asp-items="Model.Roles" class="form-control"></select>
-                <label for="Role">Role</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Update</button>
-            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-        </form>
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-4 card shadow p-3">
+            <h2 class="text-center text-info">@ViewData["Title"]</h2>
+            <form class="form-group" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-floating mb-3">
+                    <input asp-for="Name" class="form-control" />
+                    <label asp-for="Name">Name</label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Email" class="form-control" />
+                    <label asp-for="Email">Email</label>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <select asp-for="Role" asp-items="Model.Roles" class="form-control"></select>
+                    <label for="Role">Role</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </form>
+        </div>
     </div>
 </div>
