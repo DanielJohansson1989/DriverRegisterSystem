@@ -87,6 +87,34 @@ namespace DriverRegisterSystem.Controllers
                 return NotFound();
             }
 
+            if (model.changePasswordCheckbox)
+            {
+                var removePasswordResult = await _userManager.RemovePasswordAsync(user);
+                if (removePasswordResult.Succeeded)
+                {
+                    var addPasswordResult = await _userManager.AddPasswordAsync(user, model.Password);
+                    if (!addPasswordResult.Succeeded)
+                    {
+                        foreach (var error in addPasswordResult.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
+                        model.Roles = PopulateRoles();
+                        return View(model);
+                    }
+                }
+                else
+                {
+                    foreach (var error in removePasswordResult.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    model.Roles = PopulateRoles();
+                    return View(model);
+                }
+                
+            }
+
             user.Name = model.Name;
             user.UserName = model.Email;
             user.NormalizedUserName = model.Email.ToUpper();

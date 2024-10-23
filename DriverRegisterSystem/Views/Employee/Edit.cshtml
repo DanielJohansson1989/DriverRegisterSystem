@@ -20,6 +20,22 @@
                     <label asp-for="Email">Email</label>
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
+                <div class="mb-3">
+                    <label asp-for="changePasswordCheckbox">Change password</label>
+                    <input type="checkbox" id="changePasswordCheckbox" asp-for="changePasswordCheckbox" />
+                </div>
+                <div id="passwordField" style="display:none;">
+                    <div class="form-floating mb-3">
+                        <input asp-for="Password" class="form-control" />
+                        <label asp-for="Password">New Password</label>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <label asp-for="ConfirmPassword">ConfirmPassword</label>
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                </div>
                 <div class="form-floating mb-3">
                     <select asp-for="Role" asp-items="Model.Roles" class="form-control"></select>
                     <label for="Role">Role</label>
@@ -30,3 +46,20 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            $('#passwordField').hide();
+            $('#changePasswordCheckbox').change(function () {
+                if (this.checked) {
+                    $('#passwordField').show();
+                } else {
+                    $('#passwordField').hide();
+                }
+            });
+        });
+    </script>
+}
+```
