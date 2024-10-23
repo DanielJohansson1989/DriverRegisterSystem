@@ -19,12 +19,12 @@
             <div class="row">
                 <form class="d-flex justify-content-around align-items-center p-3">
                     <div class="d-flex justify-content-center">
-                        <label for="startDate">Start Date</label>
-                        <input type="datetime-local" name="startDate" class="form-control" value="@Model.StartDate" />
+                        <label asp-for="StartDate">Start Date</label>
+                        <input type="datetime-local" asp-for="StartDate" class="form-control"  />
                     </div>
                     <div class="d-flex justify-content-center">
-                        <label for="endDate">End Date</label>
-                        <input type="datetime-local" name="endDate" class="form-control" value="@Model.EndDate" />
+                        <label asp-for="EndDate">End Date</label>
+                        <input type="datetime-local" asp-for="EndDate" class="form-control"  />
                     </div>
                     <div class="">
                         <select asp-for="EmployeeFilter" asp-items="Model.SelectableEmployees" class="form-control">
@@ -58,7 +58,7 @@
                             <td>@note.Driver.DriverName</td>
                             <td>@note.Driver.CarReg</td>
                             <td>@note.NoteDescription</td>
-                            <td>@note.NoteDate</td>
+                            <td>@note.NoteDate.ToString("yyyy-MM-dd HH:mm")</td>
                             <td>@note.ResponsibleEmployee</td>
                         </tr>
                     }
