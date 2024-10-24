@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using DriverRegisterSystem.Models;
 using DriverRegisterSystem.Services;
+using DotNetEnv;
 
 namespace DriverRegisterSystem
 {
@@ -11,6 +12,8 @@ namespace DriverRegisterSystem
         public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            Env.Load();
 
             builder.Services.AddDbContext<AppDbContext>(options =>
                            options.UseSqlServer(builder.Configuration.GetConnectionString("defaultconnection")));
