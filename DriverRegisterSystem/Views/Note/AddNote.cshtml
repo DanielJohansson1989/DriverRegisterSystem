@@ -30,6 +30,7 @@
                 <input type="hidden" name="responsibleEmployee" value="@Model.ResponsibleEmployee" />
                 <input type="hidden" name="driverId" value="@Model.DriverId" />
                 <button type="submit" class="btn btn-primary">Add Note</button>
+                <a asp-action="DriverInfo" asp-controller="Driver" asp-route-id="@Model.DriverId" class="btn btn-secondary">Back</a>
             </form>
         </div>
     </div>
